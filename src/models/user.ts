@@ -38,11 +38,7 @@ export class User {
       };    
     } 
 
-    async login(user: any) {
-
-        const { email, password } = user
-    }
-
+    
     
     async gestUsers() {
   
@@ -66,6 +62,19 @@ export class User {
             console.log(error)
          }
 
+    }
+
+    async update(user: any, id: number) {
+
+      const { email, firstName, lastName } = user
+
+          try {
+            return (await client.query(`UPDATE users SET email=$1, firstName=$2, lastName=$3 WHERE id=$4`,
+              [email,firstName,lastName,id])).rows[0] 
+            
+          } catch (error) {
+             console.log(error)
+          }
     }
 
 

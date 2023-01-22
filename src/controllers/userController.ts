@@ -11,12 +11,11 @@ const user: User = new User()
 
 
 // creer un user
-export const createUser = async(req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
 
     const newUser = await user.createUser(req.body)
     return res.json(newUser);
 }
-
 
 // recuperer la liste d'utilisaeurs
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -32,7 +31,6 @@ export const showUser = async (req: Request, res:Response) => {
     const userId = parseInt(req.params.id)
  
     const oneUser = await user.userById(userId)
-       oneUser.password = undefined;
     return res.json(oneUser)
         
 }
@@ -46,6 +44,15 @@ export const deleteUser = async (req: Request, res: Response) => {
     return res.json(userDeleted)
 }
 
-// pour l'authentification
+// modifier un user
+
+export const updateUser = async (req: Request, res:Response) => {
+
+    const userId = parseInt(req.params.id)
+
+    const userUpdated = await user.update(req.body,userId)
+
+    return res.json(userUpdated)
+}
 
 
